@@ -12,12 +12,23 @@ public class Lecture3 {
   @Test
   public void min() throws Exception {
     final List<Integer> numbers = ImmutableList.of(1, 2, 3, 100, 23, 93, 99);
+    Integer minNumber = numbers.stream().
+            min((number1, number2) -> number1>number2 ? 1 : -1).
+            get();
+    assertThat(minNumber == 1);
+
+
 
   }
 
   @Test
   public void max() throws Exception {
     final List<Integer> numbers = ImmutableList.of(1, 2, 3, 100, 23, 93, 99);
+    Integer maxNumber =
+            numbers.stream()
+                    .max((number1,number2)->number1<number2?1:-1)
+                    .get();
+    assertThat(maxNumber == 100);
 
   }
 }

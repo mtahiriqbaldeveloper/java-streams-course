@@ -3,6 +3,7 @@ package lectures;
 
 import beans.Car;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -16,7 +17,14 @@ public class Lecture8 {
 
   @Test
   public void simpleGrouping() throws Exception {
+    Map<String, List<Car>> groupByCarMaker = MockData.getCars()
+            .stream()
+            .collect(Collectors.groupingBy(car -> car.getMake()));
 
+    groupByCarMaker.forEach((make,cars) -> {
+      System.out.println(make);
+      cars.forEach(System.out::println);
+    });
   }
 
   @Test
@@ -34,7 +42,12 @@ public class Lecture8 {
             "Alex"
         );
 
-
+    Map<String, Long> collect = names.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    System.out.println(collect);
+    collect.forEach((name,count)->{
+      System.out.println(name);
+      System.out.println(count);
+    });
   }
 
 }
